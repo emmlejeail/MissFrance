@@ -1,0 +1,6 @@
+<h2>The miss</h2>
+<ul class="misses">
+  <li *ngFor="let miss of misses" cdkDrag>
+    <span class="badge">{{miss.id}}</span> {{miss.name}}
+  </li>
+</ul>
