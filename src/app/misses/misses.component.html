@@ -1,6 +1,31 @@
-<h2>The miss</h2>
-<ul class="misses">
-  <li *ngFor="let miss of misses" cdkDrag>
-    <span class="badge">{{miss.id}}</span> {{miss.name}}
-  </li>
-</ul>
+<h2>Current Round</h2>
+
+<div class="example-container">
+  <h2>From the past round</h2>
+
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="missesPreviousRound"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let miss of missesPreviousRound" cdkDrag>{{miss.name}}</div>
+  </div>
+</div>
+
+<div class="example-container">
+  <h2>Prognostic for next round</h2>
+
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="missesNextRound"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let miss of missesNextRound" cdkDrag>{{miss.name}}</div>
+  </div>
+</div>
+
+<button mat-raised-button color="primary">Save prognostics</button>

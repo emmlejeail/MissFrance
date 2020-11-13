@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MISSES } from '../mock-misses';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-misses',
@@ -8,7 +9,20 @@ import { MISSES } from '../mock-misses';
 })
 export class MissesComponent implements OnInit {
 
-  misses = MISSES;
+  missesPreviousRound = MISSES;
+
+  missesNextRound = [];
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
+  }
 
   constructor() { }
 

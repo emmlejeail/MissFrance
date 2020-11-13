@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MissesComponent } from './misses/misses.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   ],
   imports: [
     BrowserModule,
+    MatButtonModule,
     AppRoutingModule,
     DragDropModule
   ],
