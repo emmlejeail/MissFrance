@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MISSES } from '../mock-misses';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { StorageDBService } from "../shared/storage-db.service";
 
 @Component({
   selector: 'app-misses',
@@ -13,6 +14,8 @@ export class MissesComponent implements OnInit {
 
   missesNextRound = [];
 
+  constructor(private storageDBservice: StorageDBService) { }
+
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -22,11 +25,17 @@ export class MissesComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
+    console.log(this.missesNextRound)
   }
 
-  constructor() { }
+  missFirestore;   
+  getMissFromFirestore = () =>
+      this.storageDBservice
+      .getMissFromFirestore()
+      .subscribe(res =>(this.missFirestore = res));
 
   ngOnInit() {
+    this.getMissFromFirestore();
   }
 
 }

@@ -28,4 +28,4 @@
   </div>
 </div>
 
-<button mat-raised-button color="primary">Save prognostics</button>
+<button mat-raised-button color="primary" (click)="this.storageDBservice.saveToFirestore()">Save prognostics</button>
